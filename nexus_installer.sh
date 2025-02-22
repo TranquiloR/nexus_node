@@ -43,8 +43,8 @@ install_dependencies() {
         echo "Утилита needrestart уже установлена."
     fi
     
-    # Установка базовых пакетов
-    sudo DEBIAN_FRONTEND=noninteractive apt install -y curl git screen build-essential pkg-config libssl-dev psmisc
+    # Установка базовых пакетов, включая protobuf-compiler
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y curl git screen build-essential pkg-config libssl-dev psmisc protobuf-compiler
     check_status "Не удалось установить базовые пакеты"
     
     # Установка Rust, если он не установлен
@@ -83,8 +83,8 @@ install_dependencies() {
         echo "Swap-файл уже существует. Пропускаем создание."
     fi
     
-    # Проверка установленных зависимостей
-    for cmd in pkg-config screen git curl rustc needrestart; do
+    # Проверка установленных зависимостей, включая protoc
+    for cmd in pkg-config screen git curl rustc needrestart protoc; do
         if ! command -v "$cmd" &> /dev/null; then
             echo "Ошибка: $cmd не установлен после попытки установки."
             exit 1
@@ -92,7 +92,6 @@ install_dependencies() {
     done
     echo "Все зависимости и swap-файл успешно установлены."
 }
-
 # Функция для установки проекта Nexus Network
 install_project() {
     echo "Установка проекта Nexus Network..."
