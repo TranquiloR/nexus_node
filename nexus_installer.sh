@@ -218,6 +218,7 @@ install_node() {
 
 # Основной цикл меню
 print_welcome
+echo -e "${GOLD}Для начала работы скрипта выберите пункт 1 и нажмите Enter${NC}"
 while true; do
     echo ""
     echo -e "${GOLD}=== Меню установщика Nexus Prover Node ===${NC}"
